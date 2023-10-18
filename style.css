@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css?family=Rye');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Rye";
+}
+
+body{
+    background-image: url(images/bg-img.gif);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+#logo{
+    height: 200px;
+    margin-left: 830px;
+}
+#guide-img{
+    height: 80px;
+    width: 70px;
+    margin-left: 750px;
+    margin-bottom: 100px;
+    border-radius: 20px;
+}
+#guide-img:hover,
+#play-btn:hover{
+    cursor: pointer;
+}
+
+#title{
+    font-size: 170px;
+    color: rgba(147, 7, 255, 0.278);
+    text-align: center;
+    -webkit-text-stroke: 2px rgb(47, 255, 206);
+}
+
+.input-box{
+    box-shadow: 0px 0px 8px 0px #259eb9ef;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: auto;
+    width: 450px;
+    font-size: 50px;
+    border-radius: 10px;
+    -webkit-text-stroke: rgba(43, 43, 242, 0);
+}
+
+#user-input{
+    margin-top: 70px;
+    margin-bottom: 20px;
+    color: rgba(126, 203, 236, 0.996);
+    -webkit-text-stroke: 1px #060606ef;
+}
+
+#nickname{
+    margin-bottom: 90px;
+    color: rgba(126, 203, 236, 0.996);
+    -webkit-text-stroke: 1px #060606ef;
+}
+::placeholder{
+    color: rgba(179, 200, 245, 0.783);
+}
+
+#play-btn{
+    display: block;
+    margin: auto;
+    padding: 3px;
+    border-radius: 10px;
+    font-size: 40px;
+    background-color: transparent;
+    box-shadow: 0px 0px 12px 0px #259eb9ef;
+    color: rgba(255, 255, 255, 0.983);
+    -webkit-text-stroke: 0.5px rgb(11, 18, 228);
+}
+
+
+/* for instructions popup */
+
+
+/* Style the popup container */
+#popup{
+    /* visibility: hidden; */
+    display: none;
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    background-image: url(images/bg-img.gif);
+    opacity: 0.9;
+}
+
+#cancel-img img{
+    height: 65px;
+}
+
+/* Style the instruction section */
+#instruction {
+    margin-top: 150px;
+    text-align: center;
+}
+
+/* Style the heading */
+#ins-heading {
+    font-size: 90px;
+    margin-bottom: 20px;
+    color: white;
+    -webkit-text-stroke: 0.5px rgb(0, 50, 248);
+}
+
+/* Style the list items */
+
+ul li {
+    margin: 10px 0;
+    font-size: 30px;
+    color: white;
+    -webkit-text-stroke: 0.3px rgb(103, 255, 8);
+}
+
+/* Style the cancel image */
+#cancel-img {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    box-shadow: 0 0 10px rgb(3, 252, 248);
+}
+#skip{
+    margin-top: 30px;
+    height: 80px;
+    box-shadow: 0 0 10px rgb(3, 252, 248);
+}
+
+#cancel-img:hover,
+#skip:hover{
+    cursor: pointer;
+}
+
+@media (min-width: 400px) and (max-width: 1023px) {
+    #logo {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  
+    #guide-img {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  
+    #title {
+      font-size: 120px;
+    }
+  
+    .input-box {
+      width: 70%;
+    }
+  
+    #user-input,
+    #nickname {
+      margin: 20px auto;
+    }
+  
+    #play-btn {
+      font-size: 35px;
+    }
+  }

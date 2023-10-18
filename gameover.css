@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css?family=Rye');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "rye";
+}
+
+body{
+    background-image: url(images/bg-img.gif);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+h1{
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 40px;
+    font-size: 130px;
+    color: #ffffff00;
+    -webkit-text-stroke: 0.9px rgb(135, 195, 244);
+}
+
+#div-score{
+    color: #2712e7eb;
+    -webkit-text-stroke: 0.9px rgb(17, 233, 208);
+    text-align: center;
+    font-size: 40px;
+    margin: 20px;
+}
+
+#high-score{
+    margin-bottom: 15px;
+}
+
+#buttons{
+    margin-top: 20px;
+    text-align: center;
+}
+
+
+button{
+    border-radius: 20px;
+    padding: 10px;
+    width: 200px;
+    font-size: 20px;
+    margin: 20px;
+    background-color: transparent;
+    color: rgb(127, 148, 243);
+    box-shadow: 0 0 12px rgb(206, 43, 235);
+}
