@@ -5,6 +5,7 @@
 }
 
 body {
+    overflow: hidden;
     background-image: url(images/w1.jpg);
     background-repeat: no-repeat;
     background-size: cover;
@@ -18,3 +19,29 @@ body {
     height: 90px;
 }
 
+.bullet {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    transition: transform 0.1s;
+  }
+
+  .asteroid {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    animation: asteroid-fall 5s linear infinite;
+  }
+
+  @keyframes asteroid-fall {
+    0% {
+        top: 0;
+        transform: rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        top: 100%;
+        transform: rotate(360deg);
+        opacity: 0;
+    }
+}

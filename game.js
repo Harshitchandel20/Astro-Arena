@@ -1,7 +1,5 @@
-// Get the spaceship element
 const spaceship = document.getElementById('spaceship');
 
-// Set the initial position and rotation of the spaceship
 let spaceshipX = 0;
 let spaceshipY = 0;
 let spaceshipRotation = 0;
@@ -11,7 +9,6 @@ function moveSpaceship(x, y, rotation) {
   spaceship.style.transform = `translate(${x}px, ${y}px) rotate(${rotation}deg)`;
 }
 
-// Function to create a bullet
 function createBullet() {
     const bullet = document.createElement('img');
     bullet.src = 'images/Bullets.png';
@@ -19,20 +16,24 @@ function createBullet() {
     bullet.style.transform = `translate(${spaceshipX}px, ${spaceshipY}px)`;
     document.body.appendChild(bullet);
   
-    // Function to move the bullet
     function moveBullet() {
+      const bulletX = parseInt(bullet.style.left, 10);
       const bulletY = parseInt(bullet.style.top, 10);
-      bullet.style.top = `${bulletY - 10}px`;
+      bullet.style.left = `${bulletX + bullet}px`;
+      bullet.style.top = `${bulletY + bullet}px`;
   
-      // Check if the bullet is out of the screen
-      if (bulletY < -10) {
+      if (
+        bulletX < -10 ||
+        bulletX > window.innerWidth ||
+        bulletY < -10 ||
+        bulletY > window.innerHeight
+      ) {
         bullet.remove();
       } else {
         requestAnimationFrame(moveBullet);
       }
     }
   
-    // Start moving the bullet
     moveBullet();
   }
 
@@ -40,7 +41,6 @@ function createBullet() {
 document.addEventListener('keydown', (event) => {
   const key = event.key;
 
-  // Move and rotate the spaceship based on the arrow key pressed
   if (key === 'ArrowUp') {
     spaceshipY -= 10;
     spaceshipRotation = 0;
@@ -54,11 +54,8 @@ document.addEventListener('keydown', (event) => {
     spaceshipX += 10;
     spaceshipRotation = 90;
   }else if (key === ' ') {
-    // Create a bullet when the spacebar is pressed
     createBullet();
   }
-
-  // Call the moveSpaceship function to update the spaceship's position and rotation
   moveSpaceship(spaceshipX, spaceshipY, spaceshipRotation);
 });
 
@@ -70,12 +67,38 @@ function getRandomNumber(min, max) {
 }
 
 // Function to create a random asteroid
-function createAsteroid() {
-    const asteroid = document.createElement('img');
-    asteroid.src = 'images/asteroid.png';
-    asteroid.className = 'asteroid'
 
+var asteroidImages = [
+    "images/asteroid1.png",
+    "images/asteroid2.png",
+    "images/asteroid3.png",
+    "images/asteroid4.png",
+    "images/asteroid5.png",
+    "images/asteroid6.png",
+    "images/asteroid7.png",
+    "images/asteroid8.png"
+  ];
 
+  // Function to create a random asteroid element
+  function createAsteroid() {
+    var asteroid = document.createElement("img");
+    asteroid.src = asteroidImages[Math.floor(Math.random() * asteroidImages.length)];
+    asteroid.classList.add("asteroid");
 
+    // Set random position and animation
+    var x = getRandomNumber(0,window.innerWidth - asteroid.width);
+    var y = getRandomNumber(0, window.innerHeight - asteroid.height);
+    asteroid.style.left = x + "px";
+    asteroid.style.top = y + "px";
+    asteroid.style.animation = "asteroid-fall " + (Math.random() * 5 + 3) + "s linear infinite";
 
-}
+    // Append asteroid to the container
+    document.getElementById("asteroids-container").appendChild(asteroid);
+  }
+
+  // Create multiple asteroids
+  for (var i = 0; i < 8; i++) {
+    createAsteroid();
+  }
+
+  
