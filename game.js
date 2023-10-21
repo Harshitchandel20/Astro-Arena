@@ -10,32 +10,48 @@ function moveSpaceship(x, y, rotation) {
 }
 
 function createBullet() {
-    const bullet = document.createElement('img');
-    bullet.src = 'images/Bullets.png';
-    bullet.className = 'bullet';
-    bullet.style.transform = `translate(${spaceshipX}px, ${spaceshipY}px)`;
-    document.body.appendChild(bullet);
+  const bullet = document.createElement('img');
+  bullet.src = 'images/Bullets.png';
+  bullet.className = 'bullet';
+  bullet.style.transform = `translate(${spaceshipX}px, ${spaceshipY}px)`;
+  document.body.appendChild(bullet);
   
-    function moveBullet() {
-      const bulletX = parseInt(bullet.style.left, 10);
-      const bulletY = parseInt(bullet.style.top, 10);
-      bullet.style.left = `${bulletX + bullet}px`;
-      bullet.style.top = `${bulletY + bullet}px`;
+  function moveBullet() {
+    const bulletY = parseInt(bullet.style.transform.split('translateY')[1], 10);
+    const bulletRect = bullet.getBoundingClientRect();
+    const asteroids = document.getElementsByClassName('asteroid');
+  
+    for (let i = 0; i < asteroids.length; i++) {
+      const asteroidRect = asteroids[i].getBoundingClientRect();
   
       if (
-        bulletX < -10 ||
-        bulletX > window.innerWidth ||
-        bulletY < -10 ||
-        bulletY > window.innerHeight
+        bulletRect.left < asteroidRect.right &&
+        bulletRect.right > asteroidRect.left &&
+        bulletRect.top < asteroidRect.bottom &&
+        bulletRect.bottom > asteroidRect.top
       ) {
+        // Collision detected, destroy the asteroid
+        asteroids[i].remove();
         bullet.remove();
-      } else {
-        requestAnimationFrame(moveBullet);
+        return;
       }
     }
   
-    moveBullet();
+    // Adjust the values to control the bullet's speed and direction
+    const bulletSpeedY = -5;
+  
+    bullet.style.transform = `translate(${bulletX}px, ${bulletY + bulletSpeedY}px)`;
+  
+    if (bulletY < -bullet.clientHeight) {
+      bullet.remove(); // Remove the bullet element when it goes off the screen
+    } else {
+      requestAnimationFrame(moveBullet);
+    }
   }
+
+  
+  moveBullet();
+}
 
 // Event listener for arrow key presses
 document.addEventListener('keydown', (event) => {
@@ -57,6 +73,7 @@ document.addEventListener('keydown', (event) => {
     createBullet();
   }
   moveSpaceship(spaceshipX, spaceshipY, spaceshipRotation);
+  checkCollision();
 });
 
 
@@ -94,6 +111,10 @@ var asteroidImages = [
 
     // Append asteroid to the container
     document.getElementById("asteroids-container").appendChild(asteroid);
+
+    asteroid.addEventListener('click', () => {
+        destroyAsteroid(asteroid);
+      });
   }
 
   // Create multiple asteroids
@@ -101,4 +122,46 @@ var asteroidImages = [
     createAsteroid();
   }
 
+  function checkCollision() {
+    const spaceshipRect = spaceship.getBoundingClientRect();
+    const asteroids = document.getElementsByClassName('asteroid');
   
+    for (let i = 0; i < asteroids.length; i++) {
+      const asteroidRect = asteroids[i].getBoundingClientRect();
+  
+      if (
+        spaceshipRect.left < asteroidRect.right &&
+        spaceshipRect.right > asteroidRect.left &&
+        spaceshipRect.top < asteroidRect.bottom &&
+        spaceshipRect.bottom > asteroidRect.top
+      ) {
+        // Collision detected
+        gameOver();
+        return;
+      }
+    }
+  }
+
+  let scorebox = document.getElementById("score")
+  let score = 0
+  function destroyAsteroid(asteroid) {
+    score += 5;
+    scorebox.textContent = score;
+    localStorage.setItem("score", score)
+    asteroid.remove();
+    createAsteroid();
+  }
+  
+  function gameOver(){
+    window.location.href = "gameover.html";
+    if (score > highscore) {
+        highscore = score
+        localStorage.setItem("highscore",highscore)
+    }
+  }
+
+
+  const bgMuisc = new Audio('images/alexander-nakarada-space-ambience.mp3')
+
+  bgMuisc.play()
+  bgMuisc.loop = true

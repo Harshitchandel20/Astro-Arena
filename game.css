@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Rye');
+
 *{
     margin: 0;
     padding: 0;
@@ -5,18 +7,20 @@
 }
 
 body {
+    cursor: url('https://res.cloudinary.com/dsi2vvtyk/image/upload/v1697468944/final_ywgpxd.png')12 12, crosshair;
     overflow: hidden;
-    background-image: url(images/w1.jpg);
+    background-image: url(images/bg-img.gif);
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
     height: 100vh;
 }
 
 #spaceship {
     height: 90px;
+    margin-bottom: 100px;
 }
 
 .bullet {
@@ -33,6 +37,21 @@ body {
     animation: asteroid-fall 5s linear infinite;
   }
 
+  #score {
+    box-shadow: 0 0 12px rgba(13, 239, 175, 0.709);
+    background-color: rgba(149, 84, 214, 0.128);
+    border-radius: 5px;
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: rgb(246, 246, 26);
+    font-size: 50px;
+    font-family: "Rye";
+    padding: 20px;
+}
+
   @keyframes asteroid-fall {
     0% {
         top: 0;
@@ -42,6 +61,6 @@ body {
     100% {
         top: 100%;
         transform: rotate(360deg);
-        opacity: 0;
+        opacity: 0.5;
     }
 }

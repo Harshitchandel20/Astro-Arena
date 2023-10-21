@@ -26,6 +26,6 @@ skip.onclick = () => {
 }
 
 
-const bgMuisc = new Audio('')
+const bgMuisc = new Audio('images/alexander-nakarada-space-ambience.mp3')
 bgMuisc.play()
 bgMuisc.loop = true
